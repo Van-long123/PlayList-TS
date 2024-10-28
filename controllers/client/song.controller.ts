@@ -35,3 +35,32 @@ export const list=async  (req:Request, res:Response) => {
         res.redirect('/topics')//trang 404 càng tốt
     }
 }
+
+export const detail=async  (req:Request, res:Response) => {
+    const slugSong:string = req.params.slugSong;
+    const song =await Song.findOne({
+        slug:slugSong,
+        deleted:false,
+        status:"active"
+    })
+    const singer=await Singer.findOne({
+        _id: song.singerId,
+        status:'active',
+        deleted:false
+    }).select('fullName')
+
+    const topic=await Topic.findOne({
+        _id: song.topicId,
+        status:'active',
+        deleted:false
+    }).select('title')
+
+    res.render('client/pages/songs/detail',
+        {
+            title:slugSong,
+            song:song,
+            singer:singer,
+            topic:topic
+        }
+    )
+}
