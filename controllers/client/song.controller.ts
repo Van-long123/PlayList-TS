@@ -2,6 +2,7 @@ import Topic from "../../models/topics.model"
 import Song from "../../models/song.model"
 import Singer from "../../models/singer.model"
 import {Request,Response,Router} from 'express';
+import FavoriteSong from "../../models/favorite-song.model";
 export const list=async  (req:Request, res:Response) => {
     try {
         const topic=await Topic.findOne({
@@ -55,6 +56,11 @@ export const detail=async  (req:Request, res:Response) => {
         deleted:false
     }).select('title')
 
+    const favoriteSong=await FavoriteSong.findOne({
+        songId:song.id,
+        // userId:res.locals.user.id 
+    })
+    song['isFavoriteSong']=favoriteSong?true:false
     res.render('client/pages/songs/detail',
         {
             title:slugSong,
@@ -93,4 +99,40 @@ export const like=async  (req:Request, res:Response) => {
     } catch (error) {
         
     }
+}
+export const favorite=async  (req:Request, res:Response) => {
+    const idSong:string =req.params.idSong;
+    const typeFavorite:string =req.params.typeFavorite;
+    switch (typeFavorite) {
+        case 'fovarite':
+            const existFavoriteSong=await FavoriteSong.findOne({
+                songId:idSong,
+                // userId:res.locals.user.id 
+            })
+            //nên kiểm tra tại user nếu bt link,và sửa class active có thể thêm nhiều đc 
+            if(!existFavoriteSong){
+                const record=new FavoriteSong({
+                    // userId: "",
+                    songId :idSong,
+                })
+                await record.save()
+            }
+            break;
+        case 'unfovarite':
+            await FavoriteSong.deleteOne({
+                songId:idSong,
+                // userId:res.locals.user.id 
+            })
+            break;
+        default:    
+            res.json({
+                code:400,
+                message:'Lỗi !'
+            })
+            break;
+    }
+    res.json({
+        code:200,
+        message:'Thành công'
+    })
 }

@@ -123,6 +123,18 @@ html{
 .singer-detail .inner-actions .inner-like { 
   cursor: pointer;
 }
+.singer-detail .inner-actions .inner-heart { 
+  cursor: pointer;
+}
+.singer-detail .inner-actions .inner-heart i{ 
+  color: #f00;
+}
+.singer-detail .inner-actions .inner-heart.active{ 
+  color: #f00;
+}
+.singer-detail .inner-actions .inner-heart.active i{  
+  font-weight: 900;
+}
 .singer-detail .inner-actions .inner-like i { 
   color: #0059ff;
 }
@@ -173,7 +185,7 @@ html{
 
 /* Định kiểu cho phần icon tim */
 .fa-heart {
-  color: #f00 !important;
+  color: #f00;
 }
 
 /* Định kiểu cho phần trình phát nhạc */

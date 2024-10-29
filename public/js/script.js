@@ -53,17 +53,46 @@ if(buttonLike){
         const option={
             method:"PATCH"
         }
-        
+        // vào nextwork fetch/XHR để xem 
         fetch(link,option) //mặc định nó sẽ là pt get
             .then(res=>{
                 // res.json() chuyển đổi dữ liệu phản hồi (thường ở định dạng JSON) thành một đối tượng JavaScript.
                 return res.json()
             })
             .then(data=>{
-                buttonLike.querySelector('span').innerHTML=`${data.like} thích`
-                // buttonLike.querySelector('span').textContent=data.like +' thích'
-                buttonLike.classList.toggle('active')
+                if(data.code==200){
+                    buttonLike.querySelector('span').innerHTML=`${data.like} thích`
+                    // buttonLike.querySelector('span').textContent=data.like +' thích'
+                    buttonLike.classList.toggle('active')
+                }
+                
             })
     })
 }
+// trong pt html chỉ có 2 pt get post để mà gửi bằng các pt khác thì phải cài thư viện còn api này thì ko 
 // button like 
+
+// button favorite 
+const buttonFavorite=document.querySelector('[button-favorite]')
+if(buttonFavorite){
+    // user_id lấy từ middleware khi đăng nhập thành công
+    buttonFavorite.addEventListener('click',e=>{
+        const idSong=buttonFavorite.getAttribute('button-favorite')
+        const isActive=buttonFavorite.classList.contains('active')
+        const typeFovarite=isActive ? 'unfovarite' : 'fovarite';
+        const link=`/songs/fovarite/${typeFovarite}/${idSong}`
+        const option={
+            method:"PATCH"
+        }
+        fetch(link,option) 
+            .then(res=>{
+                return res.json()
+            })
+            .then(data=>{
+                if(data.code==200){
+                    buttonFavorite.classList.toggle('active')
+                }
+            })
+    })
+}
+// button favorite 
