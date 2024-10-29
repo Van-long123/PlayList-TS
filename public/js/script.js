@@ -32,3 +32,38 @@ if(aplayer){
 }
 
 // APlayer
+
+
+// button like 
+const buttonLike=document.querySelector('[button-like]')
+if(buttonLike){
+    buttonLike.addEventListener('click',e=>{
+        const idSong=buttonLike.getAttribute('button-like')
+        const isActive=buttonLike.classList.contains('active')
+        const typeLike=isActive ? 'dislike' : 'like';
+        const link=`/songs/like/${typeLike}/${idSong}`
+        
+        // cách 1 dùng ajax i
+        // cách 2 dùng socket 
+        // cách 3 dùng fetch để gọi api 
+        // fetch se gọi đến link đó và tăng lên 1 đơn vị và respones về json 
+        
+        //để gửi lên bằng pt patch
+        // const option 
+        const option={
+            method:"PATCH"
+        }
+        
+        fetch(link,option) //mặc định nó sẽ là pt get
+            .then(res=>{
+                // res.json() chuyển đổi dữ liệu phản hồi (thường ở định dạng JSON) thành một đối tượng JavaScript.
+                return res.json()
+            })
+            .then(data=>{
+                buttonLike.querySelector('span').innerHTML=`${data.like} thích`
+                // buttonLike.querySelector('span').textContent=data.like +' thích'
+                buttonLike.classList.toggle('active')
+            })
+    })
+}
+// button like 

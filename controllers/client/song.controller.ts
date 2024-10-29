@@ -64,3 +64,33 @@ export const detail=async  (req:Request, res:Response) => {
         }
     )
 }
+
+// sau phải user vào và like:[userid] để biết đc user đó thích bài nào để hiển thị nút thích ntn 
+export const like=async  (req:Request, res:Response) => {
+    try {
+        const idSong:string =req.params.idSong;
+        const typeLike:string =req.params.typeLike;
+        const song =await Song.findOne({
+            _id:idSong,
+            deleted:false,
+            status:"active"
+        })
+        // sau lưu là lưu id của những người đã like nữa 
+        //like:[user_id1,user_id2,user_id3 ...] sau .length là bt có bao thằng like
+        const newLike=typeLike=="like" ? song.like+1 :song.like-1;
+        await Song.updateOne({
+            _id:idSong,
+            deleted:false,
+            status:"active"
+        },{
+            like:newLike
+        })
+        res.json({
+            code:200,
+            message:'Thành công',
+            like:newLike
+        })
+    } catch (error) {
+        
+    }
+}

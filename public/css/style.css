@@ -120,8 +120,19 @@ html{
 
 /* detail  */
 /* Định kiểu cho phần container */
+.singer-detail .inner-actions .inner-like { 
+  cursor: pointer;
+}
+.singer-detail .inner-actions .inner-like i { 
+  color: #0059ff;
+}
 
-/* Định kiểu cho tiêu đề bài hát */
+.singer-detail .inner-actions .inner-like.active{ 
+  color: #0059ff;
+}
+.singer-detail .inner-actions .inner-like.active i{ 
+  font-weight: 900;
+}
 .inner-title {
   font-size: 20px;
   font-weight: bold;
@@ -156,12 +167,13 @@ html{
 
 /* Định kiểu cho phần icon like */
 .fa-thumbs-up {
-  color: #00CC00;
+  color: #0059ff ;
+  /* color: #1c5ac5 !important; */
 }
 
 /* Định kiểu cho phần icon tim */
 .fa-heart {
-  color: #f00;
+  color: #f00 !important;
 }
 
 /* Định kiểu cho phần trình phát nhạc */
@@ -214,7 +226,7 @@ html{
   animation-duration: 12s;
   animation-iteration-count: infinite;
   animation-timing-function: linear;
-  /* animation-play-state: paused; */
+  animation-play-state: paused;
 }
 
 @keyframes spin {
