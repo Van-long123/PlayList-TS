@@ -18,7 +18,6 @@ export const index=async  (req:Request, res:Response) => {
         song['infoSong']=infoSong
         song['infoSinger']=infoSinger
     }
-    console.log(favoriteSongs)
     res.render('client/pages/favorite-songs/index',{
         title:'Bài hát yêu thích',
         favoriteSongs:favoriteSongs
