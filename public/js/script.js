@@ -29,6 +29,25 @@ if(aplayer){
     ap.on('pause', function () {
         avatar.style.animationPlayState= 'paused';
     });
+
+    // dùng settimeout bọc cái code dưới để sau time của bài hát rồi mới chạy vào đây
+    ap.on('ended', function () {
+        const link=`/songs/listen/${dataSong._id}`//object ở trong js là phải _id
+        const option={
+            method:"PATCH"
+        }
+        fetch(link,option)
+            .then(res=>{
+                return res.json()
+            })
+            .then(data=>{
+                if(data.code==200){
+                    const elementListenSpan=document.querySelector('.singer-detail .inner-listen span')
+                    elementListenSpan.innerHTML=`${data.listen} lượt nghe`
+                }
+                
+            })
+    });
 }
 
 // APlayer

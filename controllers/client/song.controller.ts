@@ -136,3 +136,34 @@ export const favorite=async  (req:Request, res:Response) => {
         message:'Thành công'
     })
 }
+
+export const listen=async  (req:Request, res:Response) => {
+    try {
+        const idSong:string =req.params.idSong;
+        const song =await Song.findOne({
+            _id:idSong,
+            deleted:false,
+            status:"active"
+        })
+        const listen:number=song.listen+1
+        await Song.updateOne({
+            _id:idSong,
+            deleted:false,
+            status:"active"
+        },{
+            listen:listen
+        })
+        const songNew=await Song.findOne({
+            _id:idSong,
+            deleted:false,
+            status:"active"
+        })
+        res.json({
+            code:200,
+            message:'Thành công',
+            listen:songNew.listen
+        })
+    } catch (error) {
+        
+    }
+}
