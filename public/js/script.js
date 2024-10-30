@@ -100,3 +100,48 @@ if(listButtonFavorite.length>0){
     
 }
 // button favorite 
+
+// Search suggest 
+const boxSearch=document.querySelector('.box-search')
+if(boxSearch){
+    const input=boxSearch.querySelector('input[name="keyword"]')
+    const boxSuggest=boxSearch.querySelector('.inner-suggest')
+    input.addEventListener('keyup',e=>{
+        const keyword=input.value
+        const link=`/search/suggest?keyword=${keyword}`
+        // khi gọi api thì nó chỉ lấy đc data phần song thôi chớ thêm infoSinger vào ko đc
+        // thì ta dùng push vào mảng newSongs ko làm như cũ
+        fetch(link) 
+            .then(res=>{
+                return res.json()
+            })
+            .then(data=>{
+                if(data.code==200){
+                    const songs=data.songs
+                    if(songs.length>0){
+                        boxSuggest.classList.add('show')
+                        const htmls=songs.map(song=>{
+                            return `
+                                <a class="inner-item" href="/songs/detail/${song.slug}">
+                                    <div class="inner-image"><img src=${song.avatar} /></div>
+                                    <div class="inner-info">
+                                        <div class="inner-title">${song.title}</div>
+                                        <div class="inner-singer"><i class="fa-solid fa-microphone-lines"></i> ${song.infoSinger.fullName}</div>
+                                    </div>
+                                </a>
+                            `
+                        })
+                        const boxList=boxSuggest.querySelector('.inner-list')
+                        boxList.innerHTML=htmls.join('') 
+                        // console.log(htmls.join(''))biến mảng thành chuỗi
+                    }
+                    else{
+                        boxSuggest.classList.remove('show')
+                    }
+                    
+                }
+                
+            })
+    })
+}
+// Search suggest 

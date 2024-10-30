@@ -6,6 +6,7 @@ import {Request,Response} from 'express';
 import { convertToSlug } from "../../helpers/convertToSlug";
 
 export const result=async  (req:Request, res:Response) => {
+    const type= req.params.type;
     const keyword:string=`${req.query.keyword}`
     let newSongs=[];
     if(keyword){
@@ -24,27 +25,55 @@ export const result=async  (req:Request, res:Response) => {
         // cắt đôi ---> cat doi ---> cat-doi
         const stringSlug=convertToSlug(keyword)
         const SlugRegex=new RegExp(stringSlug,'i')
-        
+
         const songs=await Song.find({
             $or:[
                 {title:keywordRegex},
                 {slug:SlugRegex}
             ],
             deleted:false
+            
         })
         for (const song of songs) {
             const infoSinger=await Singer.findOne({
                 _id: song.singerId,
                 status:'active',
                 deleted:false
-            })
-            song['infoSinger']=infoSinger
-        }
-        newSongs=songs
+        })
+        // song['infoSinger']=infoSinger //gán như này thì api nó ko có infoUser
+        // phải viết rõ như này mới đc chớ việc như trên và newSongs=songs thì trả về api ko nhận
+        newSongs.push({
+            id:song.id,
+            title:song.title,
+            avatar:song.avatar,
+            like:song.like,
+            slug:song.slug,
+            infoSinger:{
+                fullName:infoSinger.fullName
+            }
+        })
     }
-    res.render('client/pages/search/result',{
-        title:`Kết quả ${keyword}`,
-        keyword:keyword,
-        songs:newSongs
-    })
+    }
+    
+    // newSongs=songs
+    switch (type) {
+        case 'result':
+            res.render('client/pages/search/result',{
+                title:`Kết quả ${keyword}`,
+                keyword:keyword,
+                songs:newSongs
+            })
+            break;
+        case 'suggest':
+            res.json({
+                code:200,
+                message:"Thành công",
+                songs:newSongs
+            })
+            break;
+        
+        default:
+            break;
+    }
+    
 }
