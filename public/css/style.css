@@ -102,7 +102,21 @@
     font-weight: 700;
     color: #4d6876;
 }
+.song-item .inner-content .inner-heart {
+  font-size: 13px;
+  font-weight: 500;
+  margin-bottom: 2px;
+  cursor: pointer;
+}
 
+.song-item .inner-content .inner-heart.active {
+  color: #b90000;
+}
+
+.song-item .inner-content .inner-heart.active {
+  font-weight: 900;
+}
+/* end song-item  */
 body{
     display: flex ;
     flex-direction: column ;
@@ -127,10 +141,10 @@ html{
   cursor: pointer;
 }
 .singer-detail .inner-actions .inner-heart i{ 
-  color: #f00;
+  color: #b90000;
 }
 .singer-detail .inner-actions .inner-heart.active{ 
-  color: #f00;
+  color: #b90000;
 }
 .singer-detail .inner-actions .inner-heart.active i{  
   font-weight: 900;
@@ -174,19 +188,17 @@ html{
 
 /* Định kiểu cho phần icon thời gian */
 .fa-clock {
-  color: #f99;
+  /* color: #f99; */
 }
 
 /* Định kiểu cho phần icon like */
 .fa-thumbs-up {
-  color: #0059ff ;
+  /* color: #0059ff ; */
   /* color: #1c5ac5 !important; */
 }
 
 /* Định kiểu cho phần icon tim */
-.fa-heart {
-  color: #f00;
-}
+
 
 /* Định kiểu cho phần trình phát nhạc */
 .inner-play {

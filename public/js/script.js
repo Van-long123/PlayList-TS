@@ -73,26 +73,30 @@ if(buttonLike){
 // button like 
 
 // button favorite 
-const buttonFavorite=document.querySelector('[button-favorite]')
-if(buttonFavorite){
+const listButtonFavorite=document.querySelectorAll('[button-favorite]')
+if(listButtonFavorite.length>0){
     // user_id lấy từ middleware khi đăng nhập thành công
-    buttonFavorite.addEventListener('click',e=>{
-        const idSong=buttonFavorite.getAttribute('button-favorite')
-        const isActive=buttonFavorite.classList.contains('active')
-        const typeFovarite=isActive ? 'unfovarite' : 'fovarite';
-        const link=`/songs/fovarite/${typeFovarite}/${idSong}`
-        const option={
-            method:"PATCH"
-        }
-        fetch(link,option) 
-            .then(res=>{
-                return res.json()
-            })
-            .then(data=>{
-                if(data.code==200){
-                    buttonFavorite.classList.toggle('active')
-                }
-            })
+    listButtonFavorite.forEach(buttonFavorite=>{
+        buttonFavorite.addEventListener('click',e=>{
+            const idSong=buttonFavorite.getAttribute('button-favorite')
+            const isActive=buttonFavorite.classList.contains('active')
+            const typeFovarite=isActive ? 'unfovarite' : 'fovarite';
+            const link=`/songs/fovarite/${typeFovarite}/${idSong}`
+            const option={
+                method:"PATCH"
+            }
+            // console.log(link)
+            fetch(link,option) 
+                .then(res=>{
+                    return res.json()
+                })
+                .then(data=>{
+                    if(data.code==200){
+                        buttonFavorite.classList.toggle('active')
+                    }
+                })
+        })
     })
+    
 }
 // button favorite 
