@@ -1,5 +1,4 @@
 import mongoose from 'mongoose';
-import slug from "mongoose-slug-updater"
 const favoriteSongSchema=new mongoose.Schema({
     userId:String,
     songId:String,
