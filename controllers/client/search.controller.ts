@@ -39,19 +39,19 @@ export const result=async  (req:Request, res:Response) => {
                 _id: song.singerId,
                 status:'active',
                 deleted:false
-        })
+            })
         // song['infoSinger']=infoSinger //gán như này thì api nó ko có infoUser
         // phải viết rõ như này mới đc chớ việc như trên và newSongs=songs thì trả về api ko nhận
-        newSongs.push({
-            id:song.id,
-            title:song.title,
-            avatar:song.avatar,
-            like:song.like,
-            slug:song.slug,
-            infoSinger:{
-                fullName:infoSinger.fullName
-            }
-        })
+            newSongs.push({
+                id:song.id,
+                title:song.title,
+                avatar:song.avatar,
+                like:song.like,
+                slug:song.slug,
+                infoSinger:{
+                    fullName:infoSinger.fullName
+                }
+            })
     }
     }
     

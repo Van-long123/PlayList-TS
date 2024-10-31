@@ -319,7 +319,7 @@ padding: 10px 15px;
 }
 
 .box-search .inner-suggest .inner-item:hover {
-  background: #fefefe;
+  background: #fefefe ;
   text-decoration: none;
 }
 
@@ -356,10 +356,4 @@ padding: 10px 15px;
   color: #4d007d;
 }
 
-.box-search .inner-suggest .inner-item .inner-info .inner-singer {
-  font-size: 13px;
-  font-weight: 500;
-  color: #282828;
-  margin-bottom: 2px;
-}
 /* suggest search  */
