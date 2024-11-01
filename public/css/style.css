@@ -238,6 +238,8 @@ html{
   font-size: 14px;
   color: #999;
   line-height: 1.5;
+  /* tức là nó hiển thị đúng như những gì mà ở trong code nó đang có */
+  white-space: pre;
 }
 .singer-detail .inner-avatar {
   width: 100px;

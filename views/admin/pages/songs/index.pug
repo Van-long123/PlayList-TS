@@ -54,8 +54,8 @@ block main
                                         //-         button-change-status
                                         //-         class="badge badge-danger") #{item.status}
                                 td 
-                                    a(href=`${prefixAdmin}/songs/detail/${item.id}` class="btn btn-warning btn-sm") Chi tiết
-                                    a(href=`${prefixAdmin}/songs/edit/${item.id}` class="btn btn-secondary btn-sm ml-1") Sửa
+                                    a(href=`/${prefixAdmin}/songs/detail/${item.id}` class="btn btn-warning btn-sm") Chi tiết
+                                    a(href=`/${prefixAdmin}/songs/edit/${item.id}` class="btn btn-secondary btn-sm ml-1") Sửa
                                     button(
                                         class="btn btn-danger btn-sm ml-1"
                                         data-id=item.id

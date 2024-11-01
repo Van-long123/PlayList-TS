@@ -15,11 +15,13 @@ if(aplayer){
         // trừ khi có hành động click vào link chuyển qua detail thì đc 
         // lỗi play() failed because the user didn't interact with the document first 
         // trang nhạc của tôi cũng bị y như vâjy 
+        lrcType: 1,
         audio: [{
             name: dataSong.title,
             artist: dataSinger.fullName,
             url: dataSong.audio,
-            cover: dataSong.avatar
+            cover: dataSong.avatar,
+            lrc: dataSong.lyrics
         }]
     });
     const avatar=document.querySelector('.inner-avatar')
